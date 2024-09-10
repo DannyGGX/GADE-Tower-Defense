@@ -17,7 +17,7 @@ namespace DannyG.Paths
 
             foreach (var waypoint in waypoints)
             {
-                BezierKnot knot = new BezierKnot(waypoint.gameObject.transform.position.Add(y: 1));
+                BezierKnot knot = new BezierKnot(waypoint.gameObject.transform.position.Add(y: 0.1f));
                 splineContainer.Spline.Add(knot);
             }
             
@@ -25,7 +25,7 @@ namespace DannyG.Paths
             splineContainer.Spline.SetTangentMode(waypoints.Length - 1, TangentMode.Linear);
 
             Spline spline = splineContainer.Spline;
-            int numberOfImages = waypoints.Length * 10;
+            int numberOfImages = waypoints.Length * 2;
             for (int i = 0; i < numberOfImages; i++)
             {
                 float t = (float)i / (numberOfImages - 1);
@@ -34,7 +34,7 @@ namespace DannyG.Paths
                 Vector3 tangent = spline.EvaluateTangent(t);
                 Quaternion rotation = Quaternion.LookRotation(tangent); // Align with the spline direction
 
-                Instantiate(splineArrow, position, rotation);
+                Instantiate(splineArrow, position, rotation, transform);
             }
         }
     }
