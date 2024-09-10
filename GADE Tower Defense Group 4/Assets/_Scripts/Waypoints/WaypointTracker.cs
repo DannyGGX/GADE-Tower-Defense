@@ -7,9 +7,13 @@ public class WaypointTracker
 {
     private Node<Waypoint> currentNode;
 
+    public void SetFirstWaypoint(WaypointPath waypointPath)
+    {
+        currentNode = waypointPath.GetWaypointLinkedListHead();
+    }
+
     public Vector3 GetFirstWaypointPosition()
     {
-        currentNode = WaypointManager.Instance.GetWaypointLinkedListHead();
         return GetCurrentWaypointPosition();
     }
     public Vector3 GetNextWaypointPosition()

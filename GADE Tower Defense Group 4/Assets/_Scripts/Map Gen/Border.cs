@@ -29,5 +29,29 @@ namespace DannyG
             float z = Random.Range(minZ, maxZ);
             return new Vector3(x, 0, z);
         }
+        
+        public Vector3 GetRandomPositionOnBorder()
+        {
+            // Choose random side of the border
+            int side = Random.Range(0, 4);
+            switch (side)
+            {
+                case 0: // Top
+                    return new Vector3(Random.Range(minX, maxX), 0, maxZ);
+                case 1: // Bottom
+                    return new Vector3(Random.Range(minX, maxX), 0, minZ);
+                case 2: // Left
+                    return new Vector3(minX, 0, Random.Range(minZ, maxZ));
+                case 3: // Right
+                    return new Vector3(maxX, 0, Random.Range(minZ, maxZ));
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        
+        public bool IsOutsideBorder(Vector3 position)
+        {
+            return position.x < minX || position.x > maxX || position.z < minZ || position.z > maxZ;
+        }
     }
 }

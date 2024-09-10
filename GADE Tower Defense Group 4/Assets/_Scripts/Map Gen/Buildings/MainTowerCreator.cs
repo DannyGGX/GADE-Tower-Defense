@@ -1,4 +1,5 @@
 using System;
+using DannyG._Scripts.Units.Buildings;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,7 +16,7 @@ namespace DannyG.Buildings
         [SerializeField] private float minSteepness = 0;
         [SerializeField] private float maxSteepness = 45;
         [Space]
-        [SerializeField] private GameObject towerPrefab;
+        [SerializeField] private MainTower towerPrefab;
 
         private const float RaycastHeight = 10;
         private const float RaycastDistance = 100;
@@ -48,7 +49,13 @@ namespace DannyG.Buildings
                 break;
             }
 
-            Instantiate(towerPrefab, hit.point, Quaternion.identity);
+            MainTower mainTower = Instantiate(towerPrefab, hit.point, Quaternion.identity);
+            if (BuildingManager.Instance == null)
+            {
+                Debug.Log("No building manager in scene");
+                return;
+            }
+            BuildingManager.Instance.MainTower = mainTower;
         }
     }
 }

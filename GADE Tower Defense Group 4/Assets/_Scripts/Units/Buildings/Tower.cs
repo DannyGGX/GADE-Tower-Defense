@@ -1,6 +1,6 @@
 namespace DannyG._Scripts.Units.Buildings
 {
-    public class Tower
+    public class Tower : Building
     {
         
     }
