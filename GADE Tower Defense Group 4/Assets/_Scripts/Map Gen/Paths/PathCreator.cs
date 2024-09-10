@@ -10,6 +10,7 @@ namespace DannyG.Paths
     public class PathCreator : MonoBehaviour
     {
         [SerializeField] private Waypoint waypointPrefab;
+        [SerializeField] private GameObject splineArrow;
         [Space]
         [SerializeField, Tooltip("The minimum space between waypoints and the main tower after the first waypoint is placed")] 
         private float personalSpaceRadius = 3;
@@ -119,7 +120,7 @@ namespace DannyG.Paths
             var splineCreator = go.AddComponent<SplinePath>();
             
             var waypointsArray = waypoints.ToArray();
-            splineCreator.GenerateSpline(waypointsArray);
+            splineCreator.GenerateSpline(waypointsArray, splineArrow);
             path.SetWaypointsArray(waypointsArray);
             return path;
         }
